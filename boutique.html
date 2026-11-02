@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ébène Boutique, page d’exemple</title>
+<meta name="description" content="Page d’exemple d’une boutique de vêtements à Abidjan, avec commande par WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* 1. LES COULEURS ET LES POLICES
+   On les range ici, à un seul endroit. Pour changer le look de la boutique,
+   il suffit de modifier ces lignes. */
+:root {
+  --bg: #fbf9ff;
+  --surface: #ffffff;
+  --ink: #1a1633;
+  --muted: #5d5878;
+  --line: #e3def2;
+  --brand: #2b2a7a;
+  --pink: #d11f68;
+  --sun: #ffc72c;
+  --sun-ink: #2a1d00;
+  --font-titre: "Syne", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-texte: "DM Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0d22;
+    --surface: #19163a;
+    --ink: #f1eeff;
+    --muted: #aaa4cf;
+    --line: #2e2a5a;
+    --brand: #9d9bff;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-texte);
+  font-size: 17px;
+  line-height: 1.55;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+
+/* 2. LE BANDEAU « PAGE D'EXEMPLE » */
+.exemple { background: var(--sun); color: var(--sun-ink); font-size: 14px; font-weight: 500; }
+.exemple .wrap { display: flex; flex-wrap: wrap; gap: 4px 16px; justify-content: space-between; padding-block: 8px; }
+.exemple a { font-weight: 700; }
+
+/* 3. LE HAUT DE PAGE */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+.logo { font-family: var(--font-titre); font-weight: 800; font-size: 22px; letter-spacing: -0.01em; text-decoration: none; color: var(--brand); }
+.top nav { display: flex; gap: 20px; font-weight: 700; font-size: 15px; }
+.top nav a { text-decoration: none; }
+.top nav a:hover { text-decoration: underline; }
+
+.hero { padding-block: 36px 40px; display: grid; gap: 22px; }
+.eyebrow { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); }
+h1 { margin: 0; font-family: var(--font-titre); font-weight: 800; font-size: clamp(36px, 9vw, 64px); line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
+.lead { margin: 0; max-width: 52ch; color: var(--muted); font-size: 19px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 22px; border-radius: 999px; border: 0; background: var(--pink); color: #ffffff; font: 700 16px var(--font-texte); text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.08); }
+.btn.sombre { background: var(--brand); }
+.hero .btn { justify-self: start; }
+
+/* 4. LA COLLECTION : filtres puis grille de produits */
+section { padding-block: 36px; border-top: 1px solid var(--line); }
+h2 { margin: 0 0 16px; font-family: var(--font-titre); font-weight: 800; font-size: 28px; letter-spacing: -0.01em; }
+.filtres { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.filtre { min-height: 44px; padding: 8px 20px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font: 700 15px var(--font-texte); cursor: pointer; }
+.filtre[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #ffffff; }
+.compte { margin: 0 0 20px; color: var(--muted); font-size: 15px; }
+
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+.produit { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.photo { position: relative; aspect-ratio: 4 / 3; }
+.photo span { position: absolute; left: 10px; bottom: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,0.92); color: #1a1633; font-size: 12px; font-weight: 700; }
+.infos { display: flex; flex-direction: column; gap: 4px; padding: 16px; flex: 1; }
+.cat { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.nom { margin: 0; font-family: var(--font-titre); font-weight: 700; font-size: 19px; line-height: 1.2; }
+.prix { margin: 4px 0 12px; font-size: 18px; font-weight: 700; color: var(--pink); font-variant-numeric: tabular-nums; }
+.infos .btn { margin-top: auto; width: 100%; font-size: 15px; }
+
+/* Les motifs des « photos » : à remplacer par de vraies photos du client */
+.p1 { background: repeating-radial-gradient(circle at 50% 50%, #ffc72c 0 9px, #2b2a7a 9px 18px); }
+.p2 { background: conic-gradient(from 45deg, #d11f68, #ffc72c, #d11f68, #6a1b9a, #d11f68); }
+.p3 { background: repeating-linear-gradient(45deg, #0b6e4f 0 14px, #ffc72c 14px 22px, #1a1633 22px 36px); }
+.p4 { background: radial-gradient(#ffc72c 22%, transparent 24%) 0 0 / 30px 30px, #d11f68; }
+.p5 { background: repeating-linear-gradient(90deg, #2b2a7a 0 16px, #7a79e0 16px 32px); }
+.p6 { background: conic-gradient(#d11f68 25%, #ffc72c 0 50%, #d11f68 0 75%, #ffc72c 0) 0 0 / 40px 40px; }
+
+/* 5. COMMENT COMMANDER (3 étapes, dans l'ordre) */
+.etapes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; counter-reset: etape; }
+.etapes li { counter-increment: etape; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.etapes li::before { content: counter(etape); display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 10px; border-radius: 50%; background: var(--brand); color: #ffffff; font-family: var(--font-titre); font-weight: 800; }
+.etapes b { display: block; font-family: var(--font-titre); font-size: 18px; margin-bottom: 4px; }
+.etapes span { color: var(--muted); font-size: 16px; }
+
+/* 6. INFOS PRATIQUES */
+.pratique { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px; margin: 0; }
+.pratique dt { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.pratique dd { margin: 2px 0 0; font-weight: 500; }
+
+footer { padding-block: 28px 44px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .hero .btn { width: 100%; justify-self: stretch; }
+}
+</style>
+</head>
+<body>
+
+<!-- Bandeau qui indique que c'est un exemple -->
+<div class="exemple">
+  <div class="wrap">
+    <span>Page d’exemple : boutique fictive, produits et prix pour la démonstration.</span>
+    <a href="index.html">Page de Michel Noël</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#">Ébène Boutique</a>
+    <nav aria-label="Navigation">
+      <a href="#collection">Collection</a>
+      <a href="#commander">Commander</a>
+      <a href="#infos">Infos</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <p class="eyebrow">Nouvelle collection · Abidjan</p>
+      <h1>Des tenues qui vous ressemblent.</h1>
+      <p class="lead">Wax, lin et coton : des vêtements pour le travail, les fêtes et les jours de tous les jours. Choisissez, puis commandez en un clic sur WhatsApp.</p>
+      <a class="btn" href="#collection">Voir la collection</a>
+    </div>
+
+    <section id="collection">
+      <h2>La collection</h2>
+      <div class="filtres" id="filtres" role="group" aria-label="Filtrer par catégorie">
+        <button class="filtre" type="button" data-cat="Tous" aria-pressed="true">Tous</button>
+        <button class="filtre" type="button" data-cat="Femme" aria-pressed="false">Femme</button>
+        <button class="filtre" type="button" data-cat="Homme" aria-pressed="false">Homme</button>
+        <button class="filtre" type="button" data-cat="Accessoires" aria-pressed="false">Accessoires</button>
+      </div>
+      <p class="compte" id="compte" aria-live="polite"></p>
+      <div class="grille" id="grille"></div>
+    </section>
+
+    <section id="commander">
+      <h2>Comment commander</h2>
+      <ol class="etapes">
+        <li><b>Choisissez un article</b><span>Parcourez la collection et filtrez par catégorie.</span></li>
+        <li><b>Touchez le bouton WhatsApp</b><span>Votre message se prépare tout seul avec le nom de l’article et son prix.</span></li>
+        <li><b>On confirme avec vous</b><span>La boutique vous répond pour la taille, le paiement et la livraison.</span></li>
+      </ol>
+    </section>
+
+    <section id="infos">
+      <h2>Infos pratiques</h2>
+      <dl class="pratique">
+        <div><dt>Horaires (exemple)</dt><dd>Lundi au samedi, 9 h à 19 h</dd></div>
+        <div><dt>Adresse (exemple)</dt><dd>Yopougon, Abidjan</dd></div>
+        <div><dt>Livraison (exemple)</dt><dd>À Abidjan, sur demande</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer>Page d’exemple réalisée par Michel Noël, développeur web à Abidjan.</footer>
+</div>
+
+<script>
+/* 7. LE CODE QUI FAIT VIVRE LA PAGE (JavaScript) */
+
+/* Le numéro WhatsApp de la boutique. Pour un vrai client, remplace-le
+   par son numéro : 225 puis les 10 chiffres, sans espace. */
+const NUMERO = "2250799906391";
+
+/* Les produits. Pour en ajouter un, copie une ligne et change les valeurs.
+   "motif" choisit le dessin (p1 à p6) tant qu'il n'y a pas de vraie photo. */
+const produits = [
+  { nom: "Chemise en wax",       cat: "Homme",       prix: 15000, motif: "p1" },
+  { nom: "Robe longue en wax",   cat: "Femme",       prix: 22000, motif: "p2" },
+  { nom: "Pantalon en lin",      cat: "Homme",       prix: 12000, motif: "p3" },
+  { nom: "Ensemble deux pièces", cat: "Femme",       prix: 30000, motif: "p4" },
+  { nom: "T-shirt en coton",     cat: "Homme",       prix: 6000,  motif: "p5" },
+  { nom: "Jupe midi",            cat: "Femme",       prix: 11000, motif: "p6" },
+  { nom: "Casquette brodée",     cat: "Accessoires", prix: 4000,  motif: "p3" },
+  { nom: "Sac en tissu wax",     cat: "Accessoires", prix: 9000,  motif: "p1" }
+];
+
+const grille = document.getElementById("grille");
+const compte = document.getElementById("compte");
+const boutonsFiltre = document.querySelectorAll(".filtre");
+
+/* Écrit un prix avec des espaces : 15000 devient 15 000 FCFA */
+function formatPrix(n) {
+  return new Intl.NumberFormat("fr-FR").format(n).replace(/ | /g, " ") + " FCFA";
+}
+
+/* Fabrique le lien WhatsApp avec un message déjà écrit */
+function lienWhatsApp(p) {
+  const message = "Bonjour, je voudrais commander : " + p.nom + " (" + formatPrix(p.prix) + ")";
+  return "https://wa.me/" + NUMERO + "?text=" + encodeURIComponent(message);
+}
+
+/* Affiche les produits de la catégorie choisie */
+function afficher(categorie) {
+  const liste = categorie === "Tous" ? produits : produits.filter(p => p.cat === categorie);
+  grille.innerHTML = liste.map(p => `
+    <article class="produit">
+      <div class="photo ${p.motif}"><span>Photo ici</span></div>
+      <div class="infos">
+        <p class="cat">${p.cat}</p>
+        <h3 class="nom">${p.nom}</h3>
+        <p class="prix">${formatPrix(p.prix)}</p>
+        <a class="btn" href="${lienWhatsApp(p)}">Commander sur WhatsApp</a>
+      </div>
+    </article>
+  `).join("");
+  compte.textContent = liste.length + (liste.length > 1 ? " articles" : " article");
+}
+
+/* Quand on clique sur un filtre : on le met en avant, puis on réaffiche */
+boutonsFiltre.forEach(bouton => {
+  bouton.addEventListener("click", () => {
+    boutonsFiltre.forEach(b => b.setAttribute("aria-pressed", "false"));
+    bouton.setAttribute("aria-pressed", "true");
+    afficher(bouton.dataset.cat);
+  });
+});
+
+afficher("Tous");
+</script>
+</body>
+</html>
